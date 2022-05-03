@@ -386,7 +386,10 @@ jobs:
           steps:
             - run:
                 name: Send code coverage
-                command: bash <(curl -s https://codecov.io/bash)
+                command: |
+                  curl -Os https://uploader.codecov.io/latest/macos/codecov
+                  chmod +x codecov
+                  ./codecov
       - notify-build-finished
 
 
@@ -686,7 +689,7 @@ workflows:
           iOS: "15.2"
           device: "iPhone 13 Pro Max"
           spm: true
-          codecoverage: false
+          codecoverage: true
           context: Slack Orb
       - build-job:
           name: "Xcode_13.2.1_iOS_15.2_Release"
@@ -701,7 +704,7 @@ workflows:
           iOS: "15.2"
           device: "iPhone 13 Pro Max"
           spm: true
-          codecoverage: false
+          codecoverage: true
           context: Slack Orb
           configuration: "Release"
       - pod-job:
