@@ -840,13 +840,4 @@ workflows:
             filters:
               tags:
                 only: /^v\d+\.\d+\.\d+(-.+)?$/
-        - ios-trigger-metrics:
-            filters:
-              branches:
-                only: main
-  update-version-workflow:
-    jobs:
-      - update-version-job:
-          filters:
-            branches:
-              only: /^trigger-update-version-.*/
+        - ios-trigger-metrics
