@@ -1642,11 +1642,21 @@ open class NavigationMapView: UIView {
         if let image = Bundle.mapboxNavigation.image(named: "RouteInfoAnnotationRightHanded") {
             // define the "stretchable" areas in the image that will be fitted to the text label
             // These numbers are the pixel offsets into the PDF image asset
-            let stretchX = [ImageStretches(first: Float(33), second: Float(52))]
-            let stretchY = [ImageStretches(first: Float(32), second: Float(35))]
-            // define the "content" area of the image which is the portion that the maps sdk will use
-            // to place the text label within
-            let imageContent = ImageContent(left: 34, top: 32, right: 56, bottom: 50)
+            var stretchX: [ImageStretches]!
+            var stretchY: [ImageStretches]!
+            var imageContent: ImageContent!
+            
+            if !UIDevice.current.hasNotch {
+                stretchX = [ImageStretches(first: Float(33), second: Float(42))]
+                stretchY = [ImageStretches(first: Float(32), second: Float(30))]
+                // define the "content" area of the image which is the portion that the maps sdk will use
+                // to place the text label within
+                imageContent = ImageContent(left: 34, top: 32, right: 56, bottom: 50)
+            } else {
+                stretchX = [ImageStretches(first: Float(33), second: Float(52))]
+                stretchY = [ImageStretches(first: Float(32), second: Float(35))]
+                imageContent = ImageContent(left: 34, top: 32, right: 56, bottom: 50)
+            }
             
             let regularAnnotationImage = image.tint(routeDurationAnnotationColor)
             try style.addImage(regularAnnotationImage,
@@ -2416,5 +2426,12 @@ extension NavigationMapView: UIGestureRecognizerDelegate {
         }
         
         return false
+    }
+}
+
+extension UIDevice {
+    var hasNotch: Bool {
+        let bottom = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        return bottom > 0
     }
 }
