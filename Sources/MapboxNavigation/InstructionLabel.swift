@@ -23,6 +23,7 @@ open class InstructionLabel: StylableLabel, InstructionPresenterDataSource {
     var imageDownloadCompletion: (() -> Void)?
     weak var instructionDelegate: VisualInstructionDelegate?
     var customTraitCollection: UITraitCollection?
+    var styleID: String?
     
     var instruction: VisualInstruction? {
         didSet {
@@ -46,7 +47,7 @@ open class InstructionLabel: StylableLabel, InstructionPresenterDataSource {
                                              dataSource: self,
                                              traitCollection: customTraitCollection ?? traitCollection,
                                              downloadCompletion: update)
-        
+        styleID = presenter.spriteRepository.styleID
         let attributed = presenter.attributedText()
         attributedText = instructionDelegate?.label(self, willPresent: instruction, as: attributed) ?? attributed
     }
