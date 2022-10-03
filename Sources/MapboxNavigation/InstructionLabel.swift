@@ -23,7 +23,7 @@ open class InstructionLabel: StylableLabel, InstructionPresenterDataSource {
     var imageDownloadCompletion: (() -> Void)?
     weak var instructionDelegate: VisualInstructionDelegate?
     var customTraitCollection: UITraitCollection?
-    var styleID: String?
+    var styleType: StyleType?
     
     var instruction: VisualInstruction? {
         didSet {
