@@ -1646,12 +1646,12 @@ open class NavigationMapView: UIView {
             var stretchY: [ImageStretches]!
             var imageContent: ImageContent!
             
-            if !UIDevice.current.hasNotch {
+            if UIDevice.current.hasNotch {
                 stretchX = [ImageStretches(first: Float(33), second: Float(42))]
                 stretchY = [ImageStretches(first: Float(32), second: Float(30))]
                 // define the "content" area of the image which is the portion that the maps sdk will use
                 // to place the text label within
-                imageContent = ImageContent(left: 34, top: 32, right: 56, bottom: 50)
+                imageContent = ImageContent(left: 34, top: 32, right: 46, bottom: 40)
             } else {
                 stretchX = [ImageStretches(first: Float(33), second: Float(52))]
                 stretchY = [ImageStretches(first: Float(32), second: Float(35))]
