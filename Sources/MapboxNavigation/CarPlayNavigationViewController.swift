@@ -1035,6 +1035,7 @@ extension CarPlayNavigationViewController: StyleManagerDelegate {
         if mapboxMapStyle?.uri?.rawValue != style.mapStyleURL.absoluteString {
             let styleURI = StyleURI(url: style.mapStyleURL)
             mapboxMapStyle?.uri = styleURI
+            navigationMapView?.styleType = style.styleType
             // Update the sprite repository of wayNameView when map style changes.
             wayNameView?.label.updateStyle(styleURI: styleURI, idiom: .carPlay)
         }
