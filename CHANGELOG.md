@@ -20,6 +20,7 @@
 
 * `NavigationMapView.removeAlternativeRoutes()` and `NavigationMapView.removeContinuousAlternativeRoutesDurations()` were made public to provide a way to remove previously shown alternative routes and alternative routes duration annotations, respectively. ([#4134](https://github.com/mapbox/mapbox-navigation-ios/pull/4134))
 * Fixed an issue where tapping on a route duration annotation that overlaps a different route would cause the wrong route to be passed into `NavigationMapViewDelegate.navigationMapView(_:didSelect:)` or `NavigationMapViewDelegate.navigationMapView(_:didSelect:)`. ([#4133](https://github.com/mapbox/mapbox-navigation-ios/pull/4133))
+* Added `NavigationMapView.congestionMapping` to provide the customized mapping from `NumericCongestionLevel` and `MapboxStreetsRoadClass` to `CongestionLevel`. If provided, the route lines will display the associated colors of the `CongestionLevel` mapping result on the map view. ([#4179](https://github.com/mapbox/mapbox-navigation-ios/pull/4179))
 
 ### Banners and guidance instructions
 
