@@ -779,6 +779,8 @@ open class CarPlayNavigationViewController: UIViewController, BuildingHighlighti
         
         navigationMapView?.updateRouteLine(routeProgress: routeProgress, coordinate: location.coordinate, shouldRedraw: legIndex != currentLegIndexMapped)
         currentLegIndexMapped = legIndex
+        
+        navigationMapView?.showIntersectionSignals(with: routeProgress)
     }
     
     private func checkTunnelState(at location: CLLocation, along progress: RouteProgress) {
@@ -872,6 +874,8 @@ open class CarPlayNavigationViewController: UIViewController, BuildingHighlighti
             navigationMapView?.removeArrow()
         }
         navigationMapView?.showWaypoints(on: progress.route, legIndex: legIndex)
+        
+        navigationMapView?.showIntersectionSignals(with: progress)
     }
     
     func updateManeuvers(_ routeProgress: RouteProgress) {
@@ -1033,9 +1037,9 @@ extension CarPlayNavigationViewController: StyleManagerDelegate {
     public func styleManager(_ styleManager: StyleManager, didApply style: Style) {
         let mapboxMapStyle = navigationMapView?.mapView.mapboxMap.style
         if mapboxMapStyle?.uri?.rawValue != style.mapStyleURL.absoluteString {
+            navigationMapView?.styleType = style.styleType
             let styleURI = StyleURI(url: style.mapStyleURL)
             mapboxMapStyle?.uri = styleURI
-            navigationMapView?.styleType = style.styleType
             // Update the sprite repository of wayNameView when map style changes.
             wayNameView?.label.updateStyle(styleURI: styleURI, idiom: .carPlay)
         }
